@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Job
+from django.core.paginator import Paginator
+
 # Create your views here.
 
 

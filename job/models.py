@@ -5,6 +5,12 @@ JOB_TYPE_CHOICES = [
     ("Part Time", "Part Time"),
 ]
 
+def upload_img(instance, filename):
+    image_name, extintion = filename.split(".")
+    return f"jobs/{instance.id}.{extintion}"
+
+
+
 class Job(models.Model):
     title = models.CharField(max_length=100)
     job_type = models.CharField(max_length=15, choices=JOB_TYPE_CHOICES)
@@ -14,6 +20,7 @@ class Job(models.Model):
     salary = models.IntegerField(default=0)
     experience = models.IntegerField(default=1)
     category = models.ForeignKey("category",on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=upload_img)
     # location
 
     
