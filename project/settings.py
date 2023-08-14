@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'login',
     'blog',
     'contact',
+    'bootstrap4',
 
 ]
 
