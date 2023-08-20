@@ -1,6 +1,7 @@
 from typing import Iterable, Optional
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 JOB_TYPE_CHOICES = [
     ("Full Time", "Full Time"),
@@ -14,6 +15,7 @@ def upload_img(instance, filename):
 
 
 class Job(models.Model):
+    owner = models.ForeignKey(User, related_name="job_owner", on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     job_type = models.CharField(max_length=15, choices=JOB_TYPE_CHOICES)
     description = models.TextField(max_length=1000)
@@ -45,6 +47,7 @@ class Category(models.Model):
 
 
 class Apply(models.Model):
+    owner = models.ForeignKey(User, related_name="apply_owner", on_delete=models.CASCADE)
     job = models.ForeignKey(Job, related_name="apply_job", on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
